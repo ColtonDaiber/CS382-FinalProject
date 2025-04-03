@@ -6,7 +6,7 @@ public class enemyMovement : MonoBehaviour
     [SerializeField] GameObject targetPos;
     [SerializeField] float speed = 2000;
 
-    const float AT_POINT_THRESH = 0.25f;
+    const float AT_POINT_THRESH = 0.5f;
 
     void Start()
     {
