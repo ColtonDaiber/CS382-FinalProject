@@ -1062,13 +1062,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-<<<<<<< HEAD
-  m_Children: []
-=======
   m_Children:
   - {fileID: 1982685270}
   - {fileID: 324520395}
->>>>>>> 7fac5b4 (added visual light to enemy and smoothed enemy rotation)
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1768073909

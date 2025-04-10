@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,9 +10,10 @@ public class enemyMovement : MonoBehaviour
     [SerializeField] float rotationSpeed = 360;
     [SerializeField] bool hidePathPoints = true;
     [SerializeField] List<GameObject> pathPoints;
-    bool lookingForPlayer = false;
 
     const float AT_POINT_THRESH = 0.5f;
+
+    bool lookingForPlayer = false;
 
     void Start()
     {
@@ -24,9 +26,11 @@ public class enemyMovement : MonoBehaviour
                 Destroy(point.GetComponent<MeshRenderer>());
             }
         }
+
+        path = new NavMeshPath();
     }
 
-    NavMeshPath path = new NavMeshPath();
+    NavMeshPath path;
     int pathNextIndex = 0;
 
     void Update()
@@ -45,6 +49,7 @@ public class enemyMovement : MonoBehaviour
         {
             Vector3 Direction = (path.corners[pathNextIndex] - this.transform.position).normalized;
             Move(Direction);
+            Look(Direction);
         }
     }
 
@@ -69,7 +74,7 @@ public class enemyMovement : MonoBehaviour
                 path = newPath;
                 pathNextIndex = 0;
 
-                // DrawPath(newPath);
+                DrawPath(newPath);
             }
         }
     }
@@ -89,7 +94,6 @@ public class enemyMovement : MonoBehaviour
         velocity.z *= speed * Time.deltaTime;
 
         this.GetComponent<Rigidbody>().linearVelocity = velocity;
-        Debug.Log(velocity);
     }
 
     void Look(Vector3 direction)
@@ -101,4 +105,5 @@ public class enemyMovement : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards( transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
+
 }
