@@ -1,16 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class enemyMovement : MonoBehaviour
 {
-    [SerializeField] GameObject targetPos;
-    [SerializeField] float speed = 2000;
+    GameObject targetPos;
+    [SerializeField] float speed = 1000;
+    [SerializeField] float rotationSpeed = 360;
+    [SerializeField] bool hidePathPoints = true;
+    [SerializeField] List<GameObject> pathPoints;
+    bool lookingForPlayer = false;
 
     const float AT_POINT_THRESH = 0.5f;
 
     void Start()
     {
+        targetPos = pathPoints[0];
 
+        if(hidePathPoints)
+        {
+            foreach(GameObject point in pathPoints)
+            {
+                Destroy(point.GetComponent<MeshRenderer>());
+            }
+        }
     }
 
     NavMeshPath path = new NavMeshPath();
@@ -43,6 +56,13 @@ public class enemyMovement : MonoBehaviour
         cnt++;
         if(cnt >= 20)
         {
+            if( (new Vector2(transform.position.x, transform.position.z) - new Vector2(targetPos.transform.position.x, targetPos.transform.position.z)).sqrMagnitude < 0.3 )
+            {
+                int index = pathPoints.IndexOf(targetPos) + 1;
+                if(index >= pathPoints.Count) index = 0;
+                targetPos = pathPoints[index];
+            }
+
             if(NavMesh.CalculatePath(this.transform.position, targetPos.transform.position, NavMesh.AllAreas, newPath))
             {
                 cnt = 0;
@@ -72,7 +92,6 @@ public class enemyMovement : MonoBehaviour
         Debug.Log(velocity);
     }
 
-    public float rotationSpeed;
     void Look(Vector3 direction)
     {
         if(!lookingForPlayer && direction != Vector3.zero)
