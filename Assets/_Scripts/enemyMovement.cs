@@ -71,4 +71,15 @@ public class enemyMovement : MonoBehaviour
         this.GetComponent<Rigidbody>().linearVelocity = velocity;
         Debug.Log(velocity);
     }
+
+    public float rotationSpeed;
+    void Look(Vector3 direction)
+    {
+        if(!lookingForPlayer && direction != Vector3.zero)
+        {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
+            transform.rotation = Quaternion.RotateTowards( transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+    }
 }
