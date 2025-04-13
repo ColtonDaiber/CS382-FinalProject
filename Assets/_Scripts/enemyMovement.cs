@@ -63,7 +63,8 @@ public class enemyMovement : MonoBehaviour
         {
             if( (new Vector2(transform.position.x, transform.position.z) - new Vector2(targetPos.transform.position.x, targetPos.transform.position.z)).sqrMagnitude < 0.3 )
             {
-                int index = pathPoints.IndexOf(targetPos) + 1;
+                int index = pathPoints.IndexOf(targetPos);
+                index = pathPoints.IndexOf(targetPos) + 1;
                 if(index >= pathPoints.Count) index = 0;
                 targetPos = pathPoints[index];
             }
