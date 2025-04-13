@@ -73,27 +73,29 @@ public class enemyMovement : MonoBehaviour
             return; //return bc we are not garenteed that player game object will be found, and we will check again next frame
         }
 
-        Debug.Log("player pos " + player.transform.position + " " + player.name);
         Vector3 enemyToPlayer = player.transform.position - this.transform.position;
         float distanceToPlayer = enemyToPlayer.magnitude;
         Vector3 directionToPlayer = enemyToPlayer / distanceToPlayer;
         
-        if(name == "Enemy (1)")
-        {
-            Debug.Log(chasingPlayer);
-            Debug.Log(directionToPlayer);
-        }
+        if(name == "Enemy (1)") Debug.Log(chasingPlayer);
+        // if(name == "Enemy (1)")
+        // {
+        //     Debug.Log(chasingPlayer);
+        //     Debug.Log(directionToPlayer);
+        // }
         
         Ray ray = new Ray(this.transform.position, directionToPlayer);
-        if(name == "Enemy (1)") Debug.DrawRay(this.transform.position, directionToPlayer*viewDist, Color.red, 3);
-        if(Physics.Raycast(ray, out RaycastHit hitInfo, viewDist))
+        // if(name == "Enemy (1)") Debug.DrawRay(this.transform.position, directionToPlayer*viewDist, Color.red, 3);
+        if(Physics.Raycast(this.transform.position, directionToPlayer, out RaycastHit hitInfo, viewDist))
         {
-            if(name == "Enemy (1)") Debug.Log(hitInfo.collider.name);
-            if(hitInfo.collider.gameObject != player)
+            if(name == "Enemy (1)") Debug.Log(hitInfo.collider.name + "\n" + hitInfo.collider.gameObject.transform.parent.name + " " + (hitInfo.collider.gameObject.transform.parent == player).ToString());
+            if(hitInfo.collider.gameObject != player && (hitInfo.collider.gameObject.transform.parent == null || hitInfo.collider.gameObject.transform.parent != player))
             {
                 chasingPlayer = false;
                 return;
             }
+
+            if(name == "Enemy (1)") Debug.Log("looking for player");
 
             //if raycast hits player, calculate angle to player
             Vector3 enemyForwardDirectionGlobal = (this.transform.TransformPoint(ENEMY_FORWARD_DIR) - this.transform.position).normalized;
@@ -101,6 +103,7 @@ public class enemyMovement : MonoBehaviour
 
             if(angleToPlayer*Mathf.Rad2Deg <= 0.5f*fov && hitInfo.distance < viewDist)
             { //found player
+                if(name == "Enemy (1)") Debug.Log("found player!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 chasingPlayer = true;
             }
         }
