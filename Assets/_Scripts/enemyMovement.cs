@@ -38,6 +38,7 @@ public class enemyMovement : MonoBehaviour
         path = new NavMeshPath();
 
         GetPlayerGO();
+        Debug.Log(player);
     }
 
     NavMeshPath path;
@@ -47,19 +48,33 @@ public class enemyMovement : MonoBehaviour
     {
         LookForPlayer();
 
-        CalcNewPath();
-
-        for(int i = pathNextIndex; path != null && i < path.corners.Length; i++)
+        Vector3 moveTarget = this.transform.position;
+        
+        if(chasingPlayer)
         {
-            if( (new Vector2(this.transform.position.x, this.transform.position.z) - new Vector2(path.corners[i].x, path.corners[i].z)).magnitude < AT_POINT_THRESH )
+            moveTarget = player.transform.position;
+        }
+        else
+        {
+            CalcNewPath();
+
+            for(int i = pathNextIndex; path != null && i < path.corners.Length; i++)
             {
-                pathNextIndex ++;
+                if( (new Vector2(this.transform.position.x, this.transform.position.z) - new Vector2(path.corners[i].x, path.corners[i].z)).magnitude < AT_POINT_THRESH )
+                {
+                    pathNextIndex ++;
+                }
+            }
+
+            if(path != null && pathNextIndex < path.corners.Length)
+            {
+                moveTarget = path.corners[pathNextIndex];
             }
         }
 
-        if(path != null && pathNextIndex < path.corners.Length)
+        if(moveTarget != null)
         {
-            Vector3 Direction = (path.corners[pathNextIndex] - this.transform.position).normalized;
+            Vector3 Direction = (moveTarget - this.transform.position).normalized;
             Move(Direction);
             Look(Direction);
         }
@@ -76,26 +91,14 @@ public class enemyMovement : MonoBehaviour
         Vector3 enemyToPlayer = player.transform.position - this.transform.position;
         float distanceToPlayer = enemyToPlayer.magnitude;
         Vector3 directionToPlayer = enemyToPlayer / distanceToPlayer;
-        
-        if(name == "Enemy (1)") Debug.Log(chasingPlayer);
-        // if(name == "Enemy (1)")
-        // {
-        //     Debug.Log(chasingPlayer);
-        //     Debug.Log(directionToPlayer);
-        // }
-        
-        Ray ray = new Ray(this.transform.position, directionToPlayer);
-        // if(name == "Enemy (1)") Debug.DrawRay(this.transform.position, directionToPlayer*viewDist, Color.red, 3);
+
         if(Physics.Raycast(this.transform.position, directionToPlayer, out RaycastHit hitInfo, viewDist))
         {
-            if(name == "Enemy (1)") Debug.Log(hitInfo.collider.name + "\n" + hitInfo.collider.gameObject.transform.parent.name + " " + (hitInfo.collider.gameObject.transform.parent == player).ToString());
-            if(hitInfo.collider.gameObject != player && (hitInfo.collider.gameObject.transform.parent == null || hitInfo.collider.gameObject.transform.parent != player))
+            if(hitInfo.collider.gameObject.transform != player.transform && (hitInfo.collider.gameObject.transform.parent == null || hitInfo.collider.gameObject.transform.parent.transform != player.transform))
             {
                 chasingPlayer = false;
                 return;
             }
-
-            if(name == "Enemy (1)") Debug.Log("looking for player");
 
             //if raycast hits player, calculate angle to player
             Vector3 enemyForwardDirectionGlobal = (this.transform.TransformPoint(ENEMY_FORWARD_DIR) - this.transform.position).normalized;
@@ -103,7 +106,6 @@ public class enemyMovement : MonoBehaviour
 
             if(angleToPlayer*Mathf.Rad2Deg <= 0.5f*fov && hitInfo.distance < viewDist)
             { //found player
-                if(name == "Enemy (1)") Debug.Log("found player!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 chasingPlayer = true;
             }
         }
