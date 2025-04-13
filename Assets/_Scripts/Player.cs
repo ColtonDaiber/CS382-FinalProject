@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -21,5 +22,13 @@ public class Player : MonoBehaviour
         velocity.z = vAxis * speed;
 
         this.GetComponent<Rigidbody>().linearVelocity = velocity;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.GetComponent<enemyMovement>() != null)
+        { //player hit enemy
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name); //reload current scene
+        }
     }
 }
