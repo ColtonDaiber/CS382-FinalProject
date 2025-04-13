@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
+using System.Collections;
+using System.Collections.Generic; 
+using UnityEngine.SceneManagement;
 
 public class EndPoint : MonoBehaviour
 {
@@ -10,8 +10,8 @@ public class EndPoint : MonoBehaviour
             if(otherGO.transform.parent == null) return;
         
         Player p = otherGO.transform.parent.GetComponent<Player>();
-        if(p != null){
-         Destroy(this.gameObject);   
+        if(p != null && p.canLeave){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         }
 }
