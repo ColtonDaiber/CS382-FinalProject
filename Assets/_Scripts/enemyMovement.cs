@@ -49,7 +49,7 @@ public class enemyMovement : MonoBehaviour
         LookForPlayer();
 
         Vector3 moveTarget = this.transform.position;
-        
+
         if(chasingPlayer)
         {
             moveTarget = player.transform.position;
@@ -157,7 +157,7 @@ public class enemyMovement : MonoBehaviour
 
     void Look(Vector3 direction)
     {
-        if(!chasingPlayer && direction != Vector3.zero)
+        if(direction != Vector3.zero)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
