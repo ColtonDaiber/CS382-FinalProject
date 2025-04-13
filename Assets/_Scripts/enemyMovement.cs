@@ -5,15 +5,21 @@ using UnityEngine.AI;
 
 public class enemyMovement : MonoBehaviour
 {
+    //note this is the forward direction of the enemy, such that the length of this vector is 1
+    readonly Vector3 ENEMY_FORWARD_DIR = new Vector3(0,0,1);
+
     GameObject targetPos;
     [SerializeField] float speed = 1000;
     [SerializeField] float rotationSpeed = 360;
     [SerializeField] bool hidePathPoints = true;
     [SerializeField] List<GameObject> pathPoints;
+    [SerializeField] float viewDist = 1f;
+    [SerializeField] float fov = 45;
+    GameObject player = null;
 
     const float AT_POINT_THRESH = 0.5f;
 
-    bool lookingForPlayer = false;
+    bool chasingPlayer = false;
     int index = 0;
 
     void Start()
@@ -29,6 +35,8 @@ public class enemyMovement : MonoBehaviour
         }
 
         path = new NavMeshPath();
+
+        GetPlayerGO();
     }
 
     NavMeshPath path;
@@ -36,6 +44,8 @@ public class enemyMovement : MonoBehaviour
 
     void Update()
     {
+        LookForPlayer();
+        
         CalcNewPath();
 
         for(int i = pathNextIndex; path != null && i < path.corners.Length; i++)
@@ -52,6 +62,29 @@ public class enemyMovement : MonoBehaviour
             Move(Direction);
             Look(Direction);
         }
+    }
+
+    void LookForPlayer()
+    {
+        if(player == null)
+        {
+            GetPlayerGO();
+            return; //return bc we are not garenteed that player game object will be found, and we will check again next frame
+        }
+
+        Vector3 enemyToPlayer = player.transform.position - this.transform.position;
+        float distanceToPlayer = enemyToPlayer.magnitude;
+        Vector3 directionToPlayer = enemyToPlayer / distanceToPlayer;
+
+        Vector3 enemyForwardDirectionGlobal = this.transform.TransformPoint(ENEMY_FORWARD_DIR);
+        float angleToPlayer = Mathf.Acos(Vector3.Dot(enemyForwardDirectionGlobal, directionToPlayer)); // A . B = Cos(theta) -> theta = Acos(A . B) //both A and B are already normalized
+
+        if(angleToPlayer <= 0.5f*fov && distanceToPlayer < viewDist)
+        { //found player
+            chasingPlayer = true;
+        }
+
+        Debug.Log(chasingPlayer);
     }
 
     int cnt = 0;
@@ -99,7 +132,7 @@ public class enemyMovement : MonoBehaviour
 
     void Look(Vector3 direction)
     {
-        if(!lookingForPlayer && direction != Vector3.zero)
+        if(!chasingPlayer && direction != Vector3.zero)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
@@ -107,4 +140,10 @@ public class enemyMovement : MonoBehaviour
         }
     }
 
+
+    void GetPlayerGO()
+    {
+        Player playerScript = GameObject.FindObjectsByType<Player>(FindObjectsSortMode.None)[0];
+        if(playerScript != null) player = playerScript.gameObject;
+    }
 }
