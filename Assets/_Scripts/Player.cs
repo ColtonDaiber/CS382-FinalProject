@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed = 1;
+    public float score = 0f;
 
     // Update is called once per frame
     void Update()

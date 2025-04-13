@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7309296582208220959}
   - component: {fileID: 4794963379975330773}
   - component: {fileID: 6145923016859387695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Potted Plant 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,5 +106,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0667052, y: 0.019999996, z: 0.015686188}
-  m_Center: {x: -0.0004404988, y: 0.00013022029, z: 0.007847752}
+  m_Size: {x: 3, y: 3, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 0}
