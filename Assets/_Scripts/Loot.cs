@@ -4,12 +4,16 @@ public class Loot : MonoBehaviour
 {
     public float worth = 100;
 
-    void OnTriggerEnter(Collision coll){
+    void OnTriggerEnter(Collider coll){
         GameObject otherGO = coll.gameObject;
-        Player p = otherGO.GetComponent<Player>();
+        if(otherGO.transform.parent.GetComponent<Player>() == null) return;
+        else 
+        {
+        Player p = otherGO.transform.parent.GetComponent<Player>();
         if(p != null){
          Destroy(this.gameObject);
          p.score += worth;    
+        }
         }
     }
 
