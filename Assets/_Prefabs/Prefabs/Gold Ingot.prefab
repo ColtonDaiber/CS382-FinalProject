@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1517099736707700632}
   - component: {fileID: 881590186406641754}
   - component: {fileID: 8498495906893388283}
+  - component: {fileID: 5762414062740479065}
   m_Layer: 8
   m_Name: Gold Ingot
   m_TagString: Untagged
@@ -108,3 +109,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.05, z: 0.2}
   m_Center: {x: 0, y: 0.025, z: -0.000000037252907}
+--- !u!114 &5762414062740479065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7845884036048481592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56828b9db6e0a4046aa435c837549ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worth: 100
