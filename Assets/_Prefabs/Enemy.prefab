@@ -361,8 +361,8 @@ MonoBehaviour:
   pathPoints:
   - {fileID: 0}
   - {fileID: 0}
-  viewDist: 1
-  fov: 45
+  viewDist: 15
+  fov: 65
 --- !u!54 &2453592984328034443
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -7,14 +7,15 @@ public class enemyMovement : MonoBehaviour
 {
     //note this is the forward direction of the enemy, such that the length of this vector is 1
     readonly Vector3 ENEMY_FORWARD_DIR = new Vector3(0,0,1);
+    const float ENEMY_RADIUS = 0.5f; //used to prevent raycast from hitting itself
 
     GameObject targetPos;
     [SerializeField] float speed = 1;
     [SerializeField] float rotationSpeed = 360;
     [SerializeField] bool hidePathPoints = true;
     [SerializeField] List<GameObject> pathPoints;
-    [SerializeField] float viewDist = 1f;
-    [SerializeField] float fov = 45;
+    [SerializeField] float viewDist = 15f;
+    [SerializeField] float fov = 65;
     GameObject player = null;
 
     const float AT_POINT_THRESH = 0.5f;
@@ -72,19 +73,38 @@ public class enemyMovement : MonoBehaviour
             return; //return bc we are not garenteed that player game object will be found, and we will check again next frame
         }
 
+        Debug.Log("player pos " + player.transform.position + " " + player.name);
         Vector3 enemyToPlayer = player.transform.position - this.transform.position;
         float distanceToPlayer = enemyToPlayer.magnitude;
         Vector3 directionToPlayer = enemyToPlayer / distanceToPlayer;
+        
+        if(name == "Enemy (1)")
+        {
+            Debug.Log(chasingPlayer);
+            Debug.Log(directionToPlayer);
+        }
+        
+        Ray ray = new Ray(this.transform.position, directionToPlayer);
+        if(name == "Enemy (1)") Debug.DrawRay(this.transform.position, directionToPlayer*viewDist, Color.red, 3);
+        if(Physics.Raycast(ray, out RaycastHit hitInfo, viewDist))
+        {
+            if(name == "Enemy (1)") Debug.Log(hitInfo.collider.name);
+            if(hitInfo.collider.gameObject != player)
+            {
+                chasingPlayer = false;
+                return;
+            }
 
-        Vector3 enemyForwardDirectionGlobal = this.transform.TransformPoint(ENEMY_FORWARD_DIR);
-        float angleToPlayer = Mathf.Acos(Vector3.Dot(enemyForwardDirectionGlobal, directionToPlayer)); // A . B = Cos(theta) -> theta = Acos(A . B) //both A and B are already normalized
+            //if raycast hits player, calculate angle to player
+            Vector3 enemyForwardDirectionGlobal = (this.transform.TransformPoint(ENEMY_FORWARD_DIR) - this.transform.position).normalized;
+            float angleToPlayer = Mathf.Acos(Vector3.Dot(enemyForwardDirectionGlobal, directionToPlayer)); // A . B = Cos(theta) -> theta = Acos(A . B) //both A and B are already normalized
 
-        if(angleToPlayer <= 0.5f*fov && distanceToPlayer < viewDist)
-        { //found player
-            chasingPlayer = true;
+            if(angleToPlayer*Mathf.Rad2Deg <= 0.5f*fov && hitInfo.distance < viewDist)
+            { //found player
+                chasingPlayer = true;
+            }
         }
 
-        if(chasingPlayer) Debug.Log(chasingPlayer);
     }
 
     int cnt = 0;
