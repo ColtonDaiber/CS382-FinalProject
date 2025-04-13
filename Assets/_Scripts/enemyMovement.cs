@@ -9,7 +9,7 @@ public class enemyMovement : MonoBehaviour
     readonly Vector3 ENEMY_FORWARD_DIR = new Vector3(0,0,1);
 
     GameObject targetPos;
-    [SerializeField] float speed = 1000;
+    [SerializeField] float speed = 1;
     [SerializeField] float rotationSpeed = 360;
     [SerializeField] bool hidePathPoints = true;
     [SerializeField] List<GameObject> pathPoints;
@@ -45,7 +45,7 @@ public class enemyMovement : MonoBehaviour
     void Update()
     {
         LookForPlayer();
-        
+
         CalcNewPath();
 
         for(int i = pathNextIndex; path != null && i < path.corners.Length; i++)
@@ -84,7 +84,7 @@ public class enemyMovement : MonoBehaviour
             chasingPlayer = true;
         }
 
-        Debug.Log(chasingPlayer);
+        if(chasingPlayer) Debug.Log(chasingPlayer);
     }
 
     int cnt = 0;
@@ -117,15 +117,15 @@ public class enemyMovement : MonoBehaviour
     {
         for (int i = 0; i < path.corners.Length - 1; i++)
         {
-            Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red, 5.0f);
+            // Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red, 5.0f);
         }
     }
 
     void Move(Vector3 velocity)
     {
         velocity.y = 0;
-        velocity.x *= speed * Time.deltaTime;
-        velocity.z *= speed * Time.deltaTime;
+        velocity.x *= speed;
+        velocity.z *= speed;
 
         this.GetComponent<Rigidbody>().linearVelocity = velocity;
     }

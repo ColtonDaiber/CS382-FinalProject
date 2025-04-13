@@ -355,12 +355,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dafd99a74f6e9348bb07a59d715c439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1000
+  speed: 1
   rotationSpeed: 360
   hidePathPoints: 1
   pathPoints:
   - {fileID: 0}
   - {fileID: 0}
+  viewDist: 1
+  fov: 45
 --- !u!54 &2453592984328034443
 Rigidbody:
   m_ObjectHideFlags: 0

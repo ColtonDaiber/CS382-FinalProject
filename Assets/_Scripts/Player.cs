@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 1500;
+    public float speed = 1;
 
     // Update is called once per frame
     void Update()
@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
 
         Vector3 velocity;
         velocity.y = 0;
-        velocity.x = hAxis * speed * Time.deltaTime;
-        velocity.z = vAxis * speed * Time.deltaTime;
+        velocity.x = hAxis * speed;
+        velocity.z = vAxis * speed;
 
         this.GetComponent<Rigidbody>().linearVelocity = velocity;
     }
