@@ -2886,24 +2886,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1 &1551869446 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5979047783459813244, guid: cb7b798100ddcde499108b48d3a5a906, type: 3}
-  m_PrefabInstance: {fileID: 1602385978}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1551869450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1551869446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56828b9db6e0a4046aa435c837549ea7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  worth: 100
 --- !u!1 &1581478388
 GameObject:
   m_ObjectHideFlags: 0
@@ -2916,6 +2898,7 @@ GameObject:
   - component: {fileID: 1581478390}
   - component: {fileID: 1581478389}
   - component: {fileID: 1581478392}
+  - component: {fileID: 1581478393}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3041,6 +3024,20 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1581478393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581478388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d81d78098fc55d46ae470253245d063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minLevelScore: 500
+  playerGO: {fileID: 1695728887}
 --- !u!1 &1588319687
 GameObject:
   m_ObjectHideFlags: 0
@@ -3375,10 +3372,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5979047783459813244, guid: cb7b798100ddcde499108b48d3a5a906, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1551869450}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb7b798100ddcde499108b48d3a5a906, type: 3}
 --- !u!1001 &1655600828
 PrefabInstance:
@@ -3477,6 +3471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 14
   score: 0
+  canLeave: 0
 --- !u!54 &1695728888
 Rigidbody:
   m_ObjectHideFlags: 0
