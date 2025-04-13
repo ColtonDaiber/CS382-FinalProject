@@ -714,7 +714,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Large Safe
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8747203254114805609, guid: cb7b798100ddcde499108b48d3a5a906, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3369,7 +3370,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Large Safe (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8747203254114805609, guid: cb7b798100ddcde499108b48d3a5a906, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
