@@ -11,7 +11,7 @@ public class EndPoint : MonoBehaviour
         
         Player p = otherGO.transform.parent.GetComponent<Player>();
         if(p != null && p.canLeave){
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         }
 }
