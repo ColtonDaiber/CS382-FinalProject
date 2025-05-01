@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6760473433801597248}
   - component: {fileID: 8806491709617034634}
   - component: {fileID: 7923912212870580492}
-  - component: {fileID: 7551721272526526128}
+  - component: {fileID: 2331172654524407043}
   m_Layer: 6
   m_Name: Potted Plant 3
   m_TagString: Untagged
@@ -109,7 +109,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &7551721272526526128
+--- !u!114 &2331172654524407043
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,4 +124,4 @@ MonoBehaviour:
   player: {fileID: 0}
   spotlight: {fileID: 0}
   hideKey: 101
-  hideDistance: 2
+  hideDistance: 5
