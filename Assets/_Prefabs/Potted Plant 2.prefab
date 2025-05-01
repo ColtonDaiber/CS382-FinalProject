@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3968106703693782949}
   - component: {fileID: 1222018440291904367}
   - component: {fileID: 519302562222045165}
+  - component: {fileID: 3361839924110209278}
   m_Layer: 6
   m_Name: Potted Plant 2
   m_TagString: Untagged
@@ -108,3 +109,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &3361839924110209278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861743596355504826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ebd3ba2b971654eaac07e098f2f2e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  spotlight: {fileID: 0}
+  hideKey: 101
+  hideDistance: 2
