@@ -38,7 +38,6 @@ public class enemyMovement : MonoBehaviour
         path = new NavMeshPath();
 
         GetPlayerGO();
-        Debug.Log(player);
     }
 
     NavMeshPath path;
@@ -50,26 +49,22 @@ public class enemyMovement : MonoBehaviour
 
         Vector3 moveTarget = this.transform.position;
 
-        if(chasingPlayer)
+
+            // moveTarget = player.transform.position;
+
+        CalcNewPath();
+
+        for(int i = pathNextIndex; path != null && i < path.corners.Length; i++)
         {
-            moveTarget = player.transform.position;
+            if( (new Vector2(this.transform.position.x, this.transform.position.z) - new Vector2(path.corners[i].x, path.corners[i].z)).magnitude < AT_POINT_THRESH )
+            {
+                pathNextIndex ++;
+            }
         }
-        else
+
+        if(path != null && pathNextIndex < path.corners.Length)
         {
-            CalcNewPath();
-
-            for(int i = pathNextIndex; path != null && i < path.corners.Length; i++)
-            {
-                if( (new Vector2(this.transform.position.x, this.transform.position.z) - new Vector2(path.corners[i].x, path.corners[i].z)).magnitude < AT_POINT_THRESH )
-                {
-                    pathNextIndex ++;
-                }
-            }
-
-            if(path != null && pathNextIndex < path.corners.Length)
-            {
-                moveTarget = path.corners[pathNextIndex];
-            }
+            moveTarget = path.corners[pathNextIndex];
         }
 
         if(moveTarget != null)
@@ -114,20 +109,24 @@ public class enemyMovement : MonoBehaviour
 
     int cnt = 0;
     void CalcNewPath()
-    {
+    {   
         NavMeshPath newPath = new NavMeshPath();
 
         cnt++;
         if(cnt >= 20)
         {
-            if( (new Vector2(transform.position.x, transform.position.z) - new Vector2(targetPos.transform.position.x, targetPos.transform.position.z)).sqrMagnitude < 0.3 )
+            if(chasingPlayer)
+            {
+                targetPos = player;
+            }
+            else if( (new Vector2(transform.position.x, transform.position.z) - new Vector2(targetPos.transform.position.x, targetPos.transform.position.z)).sqrMagnitude < 0.3 )
             {
                 index = index + 1;
                 if(index >= pathPoints.Count) index = 0;
                 targetPos = pathPoints[index];
             }
 
-            if(NavMesh.CalculatePath(this.transform.position, targetPos.transform.position, NavMesh.AllAreas, newPath))
+            if(NavMesh.CalculatePath(this.transform.position, new Vector3(targetPos.transform.position.x,0,targetPos.transform.position.z), NavMesh.AllAreas, newPath))
             {
                 cnt = 0;
                 path = newPath;
@@ -142,7 +141,7 @@ public class enemyMovement : MonoBehaviour
     {
         for (int i = 0; i < path.corners.Length - 1; i++)
         {
-            // Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red, 5.0f);
+            Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red, 5.0f);
         }
     }
 
