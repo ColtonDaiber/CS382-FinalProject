@@ -49,9 +49,6 @@ public class enemyMovement : MonoBehaviour
 
         Vector3 moveTarget = this.transform.position;
 
-
-            // moveTarget = player.transform.position;
-
         CalcNewPath();
 
         for(int i = pathNextIndex; path != null && i < path.corners.Length; i++)
@@ -119,7 +116,7 @@ public class enemyMovement : MonoBehaviour
             {
                 targetPos = player;
             }
-            else if( (new Vector2(transform.position.x, transform.position.z) - new Vector2(targetPos.transform.position.x, targetPos.transform.position.z)).sqrMagnitude < 0.3 )
+            else if( targetPos == player || (new Vector2(transform.position.x, transform.position.z) - new Vector2(targetPos.transform.position.x, targetPos.transform.position.z)).sqrMagnitude < 0.3 )
             {
                 index = index + 1;
                 if(index >= pathPoints.Count) index = 0;
@@ -132,7 +129,7 @@ public class enemyMovement : MonoBehaviour
                 path = newPath;
                 pathNextIndex = 0;
 
-                DrawPath(newPath);
+                // DrawPath(newPath);
             }
         }
     }
