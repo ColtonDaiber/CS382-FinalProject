@@ -3082,7 +3082,7 @@ GameObject:
   - component: {fileID: 798379351}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6234,6 +6234,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 962215554}
     m_Modifications:
+    - target: {fileID: 620698068306799601, guid: 1d5a4478adf630b4caeec8813804a34a, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4480704509185819139, guid: 1d5a4478adf630b4caeec8813804a34a, type: 3}
       propertyPath: m_Name
       value: Coin

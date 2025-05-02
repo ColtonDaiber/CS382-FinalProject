@@ -16,11 +16,13 @@ public class Collectible : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Collectible triggered by: " + other.name);
+
             if (collectSounds.Length > 0 && audioSource != null)
             {
-                int randomIndex = Random.Range(0, collectSounds.Length);
-                AudioClip chosenClip = collectSounds[randomIndex];
-                audioSource.PlayOneShot(chosenClip);
+                AudioClip chosenClip = collectSounds[Random.Range(0, collectSounds.Length)];
+                AudioSource.PlayClipAtPoint(chosenClip, transform.position);
+
             }
 
             if (pickupEffect != null)
