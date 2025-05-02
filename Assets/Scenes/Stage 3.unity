@@ -456,6 +456,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1695728886}
+    - target: {fileID: 5540885114131584641, guid: 9e76e5193c4966c42a1088f204b70e9a, type: 3}
+      propertyPath: hideDistance
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -821,6 +825,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1695728886}
+    - target: {fileID: 8469483475635870117, guid: 35d91982422de864eafebd29f7b4e4f8, type: 3}
+      propertyPath: hideDistance
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1943,15 +1951,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4783105722350846125, guid: 5238dbedb8df21e49a39400cc3350499, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4783105722350846125, guid: 5238dbedb8df21e49a39400cc3350499, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.38268343
+      value: -0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 4783105722350846125, guid: 5238dbedb8df21e49a39400cc3350499, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4783105722350846125, guid: 5238dbedb8df21e49a39400cc3350499, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1959,7 +1967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4783105722350846125, guid: 5238dbedb8df21e49a39400cc3350499, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 45
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 4783105722350846125, guid: 5238dbedb8df21e49a39400cc3350499, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -3397,7 +3405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d81d78098fc55d46ae470253245d063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minLevelScore: 500
+  minLevelScore: 1200
   text: {fileID: 125913851}
   playerGO: {fileID: 1695728887}
 --- !u!1001 &1591849326
@@ -3838,6 +3846,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1695728886}
+    - target: {fileID: 2328569759272701838, guid: 9c90430fdda32824ab31504372faa134, type: 3}
+      propertyPath: hideDistance
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3697142533192286869, guid: 9c90430fdda32824ab31504372faa134, type: 3}
       propertyPath: m_Name
       value: Bush 2
@@ -3942,6 +3954,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1695728886}
+    - target: {fileID: -8260778386371131389, guid: 535f7485ff0b12241827da63c536c0e2, type: 3}
+      propertyPath: hideDistance
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7255520600885986113, guid: 535f7485ff0b12241827da63c536c0e2, type: 3}
       propertyPath: m_Name
       value: Potted Plant 6
