@@ -10,11 +10,15 @@ public class DumpsterHide : MonoBehaviour
     private bool isHidden = false;
     private Renderer[] playerRenderers;
     private Collider[] playerColliders;
+    private MonoBehaviour playerMovement; // Replace with actual movement script name
+    private Rigidbody playerRigidbody;
 
     void Start()
     {
         playerRenderers = player.GetComponentsInChildren<Renderer>();
         playerColliders = player.GetComponentsInChildren<Collider>();
+        playerMovement = player.GetComponent<Player>(); // Replace if your script is named differently
+        playerRigidbody = player.GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -39,6 +43,7 @@ public class DumpsterHide : MonoBehaviour
 
     void HidePlayer()
     {
+        // Disable rendering and collision
         foreach (Renderer rend in playerRenderers)
             rend.enabled = false;
 
@@ -47,6 +52,13 @@ public class DumpsterHide : MonoBehaviour
 
         if (spotlight != null)
             spotlight.enabled = false;
+
+        // Stop and disable movement
+        if (playerRigidbody != null)
+            playerRigidbody.linearVelocity = Vector3.zero;
+
+        if (playerMovement != null)
+            playerMovement.enabled = false;
 
         isHidden = true;
     }
@@ -61,6 +73,9 @@ public class DumpsterHide : MonoBehaviour
 
         if (spotlight != null)
             spotlight.enabled = true;
+
+        if (playerMovement != null)
+            playerMovement.enabled = true;
 
         isHidden = false;
     }
