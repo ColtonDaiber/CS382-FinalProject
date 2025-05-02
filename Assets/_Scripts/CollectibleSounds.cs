@@ -21,7 +21,8 @@ public class Collectible : MonoBehaviour
             if (collectSounds.Length > 0 && audioSource != null)
             {
                 AudioClip chosenClip = collectSounds[Random.Range(0, collectSounds.Length)];
-                AudioSource.PlayClipAtPoint(chosenClip, transform.position);
+                AudioSource.PlayClipAtPoint(chosenClip, Camera.main.transform.position, 1f);
+
 
             }
 
